@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">BasicUnitConverter</string>
+    <string name="welcome_name">Basic Unit Converter</string>
+    <string name="author_name">by Saurav Singh Rana</string>
+    <string name="logo">logo</string>
+    <string-array name="weight_array">
+        <item>Kg</item>
+        <item>Pound</item>
+        <item>Ounce</item>
+    </string-array>
+    <string-array name="length_array">
+        <item>Km</item>
+        <item>Mile</item>
+        <item>Foot</item>
+        <item>Inch</item>
+        <item>Cm</item>
+    </string-array>
+    <string-array name="temp_array">
+        <item>Celsius</item>
+        <item>Kelvin</item>
+        <item>Fahrenheit</item>
+    </string-array>
+</resources>
