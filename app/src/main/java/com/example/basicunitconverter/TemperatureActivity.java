@@ -3,7 +3,10 @@ package com.example.basicunitconverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,23 +24,25 @@ public class TemperatureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_temperature);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        EditText editText = (EditText) findViewById(R.id.editTextNumberDecimal);
-        TextView textView = (TextView) findViewById(R.id.textView3);
-        Button button = (Button) findViewById(R.id.button);
+        EditText editText = findViewById(R.id.editTextNumberDecimal);
+        TextView textView = findViewById(R.id.textView3);
+        Button button = findViewById(R.id.button);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.temp_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.temp_array, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
         button.setOnClickListener(v -> {
+
+            closeKeyboard();
 
             double value = Double.parseDouble(editText.getText().toString());
 
@@ -52,14 +57,14 @@ public class TemperatureActivity extends AppCompatActivity {
                             break;
 
                         case "Kelvin":
-                            double newValue = (double) (value + 273.15);
+                            double newValue = value + 273.15;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Fahrenheit":
 
-                            newValue = (double) ((value * 1.8) + 32);
+                            newValue = (value * 1.8) + 32;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -69,7 +74,7 @@ public class TemperatureActivity extends AppCompatActivity {
                 case "Kelvin":
                     switch (spinnerText2) {
                         case "Celsius":
-                            double newValue = (double) (value - 273.15);
+                            double newValue = value - 273.15;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -79,7 +84,7 @@ public class TemperatureActivity extends AppCompatActivity {
                             break;
 
                         case "Fahrenheit":
-                            newValue = (double) ((value - 273.15) * 1.8 + 32);
+                            newValue = (value - 273.15) * 1.8 + 32;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -89,14 +94,14 @@ public class TemperatureActivity extends AppCompatActivity {
                 case "Fahrenheit":
                     switch (spinnerText2) {
                         case "Celsius":
-                            double newValue = (double) ((value - 32) * 0.555);
+                            double newValue = (value - 32) * 0.555;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
 
                         case "Kelvin":
-                            newValue = (double) ((value - 32) * 0.555 + 273.15);
+                            newValue = (value - 32) * 0.555 + 273.15;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -108,6 +113,13 @@ public class TemperatureActivity extends AppCompatActivity {
                     break;
             }
         });
+    }
 
+    private void closeKeyboard(){
+        View view = this.getCurrentFocus();
+        if(view!=null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }

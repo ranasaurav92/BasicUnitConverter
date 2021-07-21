@@ -3,7 +3,10 @@ package com.example.basicunitconverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,23 +24,25 @@ public class LengthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_length);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        EditText editText = (EditText) findViewById(R.id.editTextNumberDecimal);
-        TextView textView = (TextView) findViewById(R.id.textView3);
-        Button button = (Button) findViewById(R.id.button);
+        EditText editText = findViewById(R.id.editTextNumberDecimal);
+        TextView textView = findViewById(R.id.textView3);
+        Button button = findViewById(R.id.button);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.length_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.length_array, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
         button.setOnClickListener(v -> {
+
+            closeKeyboard();
 
             double value = Double.parseDouble(editText.getText().toString());
 
@@ -52,25 +57,25 @@ public class LengthActivity extends AppCompatActivity {
                             break;
 
                         case "Mile":
-                            double newValue = (double) (value / 1.609);
+                            double newValue = value / 1.609;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Foot":
-                            newValue = (double) (value * 3280.84);
+                            newValue = value * 3280.84;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Inch":
-                            newValue = (double) (value * 39370.1);
+                            newValue = value * 39370.1;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Cm":
-                            newValue = (double) (value * 100000);
+                            newValue = value * 100000;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -81,7 +86,7 @@ public class LengthActivity extends AppCompatActivity {
                     switch (spinnerText2) {
 
                         case "Km":
-                            double newValue = (double) (value * 1.609);
+                            double newValue = value * 1.609;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -91,19 +96,19 @@ public class LengthActivity extends AppCompatActivity {
                             break;
 
                         case "Foot":
-                            newValue = (double) (value * 5280);
+                            newValue = value * 5280;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Inch":
-                            newValue = (double) (value * 63360);
+                            newValue = value * 63360;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Cm":
-                            newValue = (double) (value * 160934);
+                            newValue = value * 160934;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -113,13 +118,13 @@ public class LengthActivity extends AppCompatActivity {
                 case "Foot":
                     switch (spinnerText2) {
                         case "Km":
-                            double newValue = (double) (value / 3281);
+                            double newValue = value / 3281;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Mile":
-                            newValue = (double) (value / 5280);
+                            newValue = value / 5280;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -129,13 +134,13 @@ public class LengthActivity extends AppCompatActivity {
                             break;
 
                         case "Inch":
-                            newValue = (double) (value * 12);
+                            newValue = value * 12;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Cm":
-                            newValue = (double) (value * 30.48);
+                            newValue = value * 30.48;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -145,19 +150,19 @@ public class LengthActivity extends AppCompatActivity {
                 case "Inch":
                     switch (spinnerText2) {
                         case "Km":
-                            double newValue = (double) (value / 39370);
+                            double newValue = value / 39370;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Mile":
-                            newValue = (double) (value / 63360);
+                            newValue = value / 63360;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Foot":
-                            newValue = (double) (value / 12);
+                            newValue = value / 12;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -167,7 +172,7 @@ public class LengthActivity extends AppCompatActivity {
                             break;
 
                         case "Cm":
-                            newValue = (double) (value * 2.54);
+                            newValue = value * 2.54;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -177,25 +182,25 @@ public class LengthActivity extends AppCompatActivity {
                 case "Cm":
                     switch (spinnerText2) {
                         case "Km":
-                            double newValue = (double) (value / 100000);
+                            double newValue = value / 100000;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Mile":
-                            newValue = (double) (value / 160934);
+                            newValue = value / 160934;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Foot":
-                            newValue = (double) (value / 30.48);
+                            newValue = value / 30.48;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Inch":
-                            newValue = (double) (value / 2.54);
+                            newValue = value / 2.54;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -207,7 +212,13 @@ public class LengthActivity extends AppCompatActivity {
                     break;
             }
         });
+    }
 
-
+    private void closeKeyboard(){
+        View view = this.getCurrentFocus();
+        if(view!=null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }

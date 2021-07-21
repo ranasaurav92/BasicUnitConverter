@@ -3,7 +3,10 @@ package com.example.basicunitconverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,9 +24,9 @@ public class WeightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weight);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        EditText editText = (EditText) findViewById(R.id.editTextNumberDecimal);
-        TextView textView = (TextView) findViewById(R.id.textView3);
-        Button button = (Button) findViewById(R.id.button);
+        EditText editText = findViewById(R.id.editTextNumberDecimal);
+        TextView textView = findViewById(R.id.textView3);
+        Button button = findViewById(R.id.button);
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.weight_array, android.R.layout.simple_spinner_item);
@@ -36,6 +39,8 @@ public class WeightActivity extends AppCompatActivity {
         spinner2.setAdapter(adapter2);
 
         button.setOnClickListener(v -> {
+
+            closeKeyboard();
 
             double value = Double.parseDouble(editText.getText().toString());
 
@@ -50,13 +55,13 @@ public class WeightActivity extends AppCompatActivity {
                             break;
 
                         case "Pound":
-                            double newValue = (double) (value * 2.205);
+                            double newValue = value * 2.205;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
                         case "Ounce":
-                            newValue = (double) (value * 35.274);
+                            newValue = value * 35.274;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -66,7 +71,7 @@ public class WeightActivity extends AppCompatActivity {
                 case "Pound":
                     switch (spinnerText2) {
                         case "Kg":
-                            double newValue = (double) (value / 2.205);
+                            double newValue = value / 2.205;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -76,7 +81,7 @@ public class WeightActivity extends AppCompatActivity {
                             break;
 
                         case "Ounce":
-                            newValue = (double) (value * 16);
+                            newValue = value * 16;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -86,14 +91,14 @@ public class WeightActivity extends AppCompatActivity {
                 case "Ounce":
                     switch (spinnerText2) {
                         case "Kg":
-                            double newValue = (double) (value / 35.274);
+                            double newValue = value / 35.274;
                             String outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
 
 
                         case "Pound":
-                            newValue = (double) (value / 16);
+                            newValue = value / 16;
                             outputValue = Double.toString(newValue);
                             textView.setText(outputValue);
                             break;
@@ -105,5 +110,13 @@ public class WeightActivity extends AppCompatActivity {
                     break;
             }
         });
+    }
+
+    private void closeKeyboard(){
+        View view = this.getCurrentFocus();
+        if(view!=null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }
